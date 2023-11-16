@@ -1,11 +1,60 @@
 (() => {
 
-    //variables
+  //variables
   const model = document.querySelector("#model");
   const hotspots = document.querySelectorAll(".Hotspot");
 
-  const materialTemplate = document.querySelector("#material-template");
-  const materialList = document.querySelector("#material-list");     
+  //This information needs to be removed then pulled with an AJAX Call using the Fetch API
+  //this is the api url https://swiftpixel.com/earbud/api/infoboxes"
+
+  const infoBoxes = [
+    {
+      title: 'Noise-cancelling microphones',
+      text: 'Noise-cancelling microphones and a rear copper shield are optimally placed to quickly detect outside noises, working together to counter noise before it disturbs your experience.',
+      image: 'images/ear-piece.jpg'
+    },
+    {
+      title: 'Comfortable fit',
+      text: 'Three pairs of ultra comfortable silicone tips are included. The tips create an acoustic seal that blocks outside audio and secures the earbuds in place.',
+      image: 'images/ear-piece.jpg'
+    },
+    {
+      title: '360 AUDIO',
+      text: '360 Audio places sound all around you, while Dolby Head Tracking™ technology delivers an incredible three-dimensional listening experience.',
+      image: 'images/ear-piece.jpg'
+    },
+    {
+      title: 'Ultra Fast Charging',
+      text: 'Charge your earbuds in 30 minutes or less with our hyper charging technology.',
+      image: 'images/ear-piece.jpg'
+    },
+  ];
+
+    //This information needs to be removed then pulled with an AJAX Call using the Fetch API
+    //this is the api url https://swiftpixel.com/earbud/api/materials"
+
+  const materialListData = [
+    {
+      heading: "Precision-Crafted Polymers",
+      description: "Our earbuds are meticulously molded from high-quality plastics, ensuring a blend of elegance, comfort, and resilience that's second to none."
+    },
+    {
+      heading: "Luxurious Silicone Harmony",
+      description: "Our uniquely engineered ear tips are cocooned in plush silicone, delivering an opulent embrace for your ears, ensuring an unrivaled fit and exquisite audio experience."
+    },
+    {
+      heading: "Rubberized Cables",
+      description: "Experience the unparalleled freedom of movement with our flexible rubber cables that promise durability without compromise."
+    },
+    {
+      heading: "Enhanced Comfort Sensors",
+      description: "A touch of magic in the form of built-in microphones and sensors empowers your earbuds to obey your every command, making your audio journey seamless and enchanting."
+    },
+    {
+      heading: "Artistic Mesh Guard",
+      description: "Shielded by artful mesh screens, our speakers remain untarnished, keeping your listening experience pristine."
+    }
+  ];
 
   //functions
   function modelLoaded() {
@@ -16,125 +65,41 @@
 
   function loadInfoBoxes() {
 
-    fetch("https://swiftpixel.com/earbud/api/infoboxes")
-    .then(response => response.json())
-    .then(infoBoxes => {
-        console.log(infoBoxes);
+    //make AJAX call here
 
-        let ul = document.createElement("ul");
+    infoBoxes.forEach((infoBox, index) => {
+      let selected = document.querySelector(`#hotspot-${index+1}`);
+      
+      const titleElement = document.createElement('h2');
+      titleElement.textContent = infoBox.title;
 
-        infoBoxes.results.forEach(result => {
+      const textElement = document.createElement('p');
+      textElement.textContent = infoBox.text;
 
-            const li = document.createElement("li");
-
-            const h3 = document.createElement("h3");
-            h3.textContent = `${result.heading}`;
-
-            const p = document.createElement("p");
-            p.textContent = `${result.description}`;
-
-            const img = document.createElement("img");
-            img.src = `{images/${result.thumbnail}}`;
-
-        li.appendChild(h3);
-        li.appendChild(p);
-        ul.appendChild(li);
-
+      selected.appendChild(titleElement);
+      selected.appendChild(textElement);
     });
-
-    loadInfoBoxes.innerHTML = "";
-    loadInfoBoxes.appendChild(ul);
-
-    })
-    .catch(error => console.error(error));
-}
-
-loadInfoBoxes();
+  }
+  loadInfoBoxes();
 
 
-const materialsList = document.querySelector("#material-list");
+  function showInfo() {
+    let selected = document.querySelector(`#${this.slot}`);
+    gsap.to(selected, 1, { autoAlpha: 1 });
+  }
 
-let spinner = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(255, 255, 255); display: block; shape-rendering: auto;" width="215px" height="215px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-    // <path fill="none" stroke="#e90c59" stroke-width="9" stroke-dasharray="128.29446411132812 128.29446411132812" d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z" stroke-linecap="round" style="transform:scale(0.91);transform-origin:50px 50px">
-    //   <animate attributeName="stroke-dashoffset" repeatCount="indefinite" dur="1.3888888888888888s" keyTimes="0;1" values="0;256.58892822265625"/>
-    // </path>
-    // <!-- [ldio] generated by https://loading.io/ --></svg>`;
-    
-function loadMaterialInfo() {
+  function hideInfo() {
+    let selected = document.querySelector(`#${this.slot}`);
+    gsap.to(selected, 1, { autoAlpha: 0 });
+  }
 
-    materialList.innerHTML = spinner;
+  //Event listeners
+  model.addEventListener("load", modelLoaded);
 
-    fetch("https://swiftpixel.com/earbud/api/materials")
-    .then(response => response.json())
-    .then(materials => {
-        console.log(materials);
-
-        let ul = document.createElement("ul");
-
-        materials.result.forEach(result => {
-
-            const li = document.createElement("li");
-
-            const h3 = document.createElement("h3");
-            h3.textContent = result.heading;
-
-            const p = document.createElement("p");
-            p.textContent = result.description;
-
-            li.appendChild(h3);
-            li.appendChild(p);
-            ul.appendChild(li);
-
-        });
-
-        loadMaterialInfo.innerHTML = "";
-        loadMaterialInfo.appendChild(ul);
-
-    })
-    .catch(error => console.error(error));
-}
-
-loadMaterialInfo();
-
-
-function materialListD() {
-
-materialListData.forEach(material => {
-    //Make a copy of the template
-    const clone = materialTemplate.content.cloneNode(true);
-
-    const materialHeading = clone.querySelector(".material-heading");
-    materialHeading.textContent = material.heading;
-
-    const materialDescription = clone.querySelector(".material-description");
-    materialDescription.textContent = material.description;
-
-    //aooend the populated templated to the ul
-    materialList.appendChild(clone);
-    console.log(clone);
-  })
-
-}
-
-materialListD();
-
-
-function showInfo() {
-  let selected = document.querySelector(`#${this.slot}`);
-  gsap.to(selected, 1, { autoAlpha: 1 });
-}
-
-function hideInfo() {
-  let selected = document.querySelector(`#${this.slot}`);
-  gsap.to(selected, 1, { autoAlpha: 0 });
-}
-
-//Event listeners
-model.addEventListener("load", modelLoaded);
-
-hotspots.forEach(function (hotspot) {
-  hotspot.addEventListener("mouseenter", showInfo)
-  hotspot.addEventListener("mouseleave", hideInfo)
-  });
+  hotspots.forEach(function (hotspot) {
+    hotspot.addEventListener("mouseenter", showInfo);
+    hotspot.addEventListener("mouseleave", hideInfo);
+  });
 
 })();
+
