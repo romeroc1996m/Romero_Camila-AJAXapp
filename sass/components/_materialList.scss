@@ -1,0 +1,30 @@
+#materialList{
+
+}
+
+#materialList h2 {
+    margin-bottom: 20px;
+}
+
+#materialList ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none; //to remove bullets
+}
+
+#materialList ul li {
+    padding: 20px;
+}
+
+#materialList ul li:nth-child(odd) {
+    background-color: #efefef; // to add rows color difference
+}
+
+#materialList ul li img {  // to reduce spacing in rows
+    float: left;
+    margin-right: 20px;
+}
+
+#materialList svg {
+    max-width: 100px;
+}
