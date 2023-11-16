@@ -42,8 +42,8 @@
 
     });
 
-    materialList.innerHTML = "";
-    materialList.appendChild(ul);
+    loadInfoBoxes.innerHTML = "";
+    loadInfoBoxes.appendChild(ul);
 
     })
     .catch(error => console.error(error));
@@ -96,6 +96,9 @@ function loadMaterialInfo() {
 
 loadMaterialInfo();
 
+
+function materialListD() {
+
 materialListData.forEach(material => {
     //Make a copy of the template
     const clone = materialTemplate.content.cloneNode(true);
@@ -110,6 +113,10 @@ materialListData.forEach(material => {
     materialList.appendChild(clone);
     console.log(clone);
   })
+
+}
+
+materialListD();
 
 
 function showInfo() {
