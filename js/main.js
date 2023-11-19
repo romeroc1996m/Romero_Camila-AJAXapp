@@ -10,31 +10,31 @@
 
     fetch("https://swiftpixel.com/earbud/api/infoboxes")
     .then(response => response.json())
-    .then(infoBoxes => {
-      console.log(infoBoxes);
+    .then(infoboxes => {
+      console.log(infoboxes);
+      
+      infoboxes.forEach((infobox, index) => {
 
-      let ul = document.createElement("ul");
-
-      infoBoxes.result.forEach(result => {
+        let selected = document.querySelector(`#hotspot-${index+1}`);
 
         const li = document.createElement("li");
 
         const img = document.createElement("img");
-        img.src = result.picture.thumbnail;
+        img.src = `images/${infobox.thumbnail}`;
 
-        const h3 = document.create("h3");
-        h3.textContent = result.heading;
 
-        const p = document.create("p");
-        h3.textContent = result.description;
+        const h3 = document.createElement("h3");
+        h3.textContent = infobox.heading;
+
+        const p = document.createElement("p");
+        p.textContent = infobox.description;
         
-        li.appendChild(img);
-        li.appendChild(h3);
-        li.appendChild(p);
-        ul.appendChild(li);
+        selected.appendChild(li);
+        selected.appendChild(img);
+        selected.appendChild(h3);
+        selected.appendChild(p);
+        
       })
-
-      infoBoxes.appendChild(ul);      
 
     })
     .catch(error => console.error(error)); 
