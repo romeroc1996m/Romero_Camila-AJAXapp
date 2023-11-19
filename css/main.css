@@ -176,4 +176,31 @@ model-viewer > #ar-prompt > img {
 
 #materialList svg {
   max-width: 100px;
+}
+
+#infoboxes h2 {
+  margin-bottom: 20px;
+}
+
+#infoboxes ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+#infoboxes ul li {
+  padding: 20px;
+}
+
+#infoboxes ul li:nth-child(odd) {
+  background-color: #efefef;
+}
+
+#infoboxes ul li img {
+  float: left;
+  margin-right: 20px;
+}
+
+#infoboxes svg {
+  max-width: 100px;
 }/*# sourceMappingURL=main.css.map */
