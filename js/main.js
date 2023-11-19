@@ -4,9 +4,9 @@
   const model = document.querySelector("#model");
   const hotspots = document.querySelectorAll(".Hotspot");
 
-  const Getinfoboxes = document.querySelector("#infoBoxesTemplate")
+  const infoboxes = document.querySelector("#infoboxes");
 
-  function Getinfoboxes() {
+  function getinfoboxes() {
 
     fetch("https://swiftpixel.com/earbud/api/infoboxes")
     .then(response => response.json())
@@ -37,9 +37,9 @@
       infoBoxes.appendChild(ul);      
 
     })
-    
+    .catch(error => console.error(error)); 
   }
-  Getinfoboxes();
+  getinfoboxes();
 
   //This information needs to be removed then pulled with an AJAX Call using the Fetch API
   //this is the api url https://swiftpixel.com/earbud/api/infoboxes"
