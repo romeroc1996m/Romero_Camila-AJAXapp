@@ -1,27 +1,27 @@
 
-#materialList h2 {
+#materials h2 {
     margin-bottom: 20px;
 }
 
-#materialList ul {
+#materials ul {
     padding: 0;
     margin: 0;
     list-style-type: none; //to remove bullets
 }
 
-#materialList ul li {
+#materials ul li {
     padding: 20px;
 }
 
-#materialList ul li:nth-child(odd) {
+#materials ul li:nth-child(odd) {
     background-color: #efefef; // to add rows color difference
 }
 
-#materialList ul li img {  // to reduce spacing in rows
+#materials ul li img {  // to reduce spacing in rows
     float: left;
     margin-right: 20px;
 }
 
-#materialList svg {
+#materials svg {
     max-width: 100px;
 }
