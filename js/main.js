@@ -64,6 +64,7 @@
     fetch("https://swiftpixel.com/earbud/api/materials")
     .then(response => response.json())
     .then(materials => {
+      console.log(materials);
       
       materials.forEach(material => {
       
@@ -79,9 +80,9 @@
     
     });
     
-    materialsContainer.innerHTML = "";
+    materials.innerHTML = "";
   })
-  
+  .catch(error => console.error("Error fetching materials",error)); 
 }
 loadInfoBoxes();
 
